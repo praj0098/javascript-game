@@ -1,0 +1,79 @@
+<html>
+<head> 
+    <title> Javascript Projector</title>
+    <style type = "text/css">
+        body {
+            font-family: monospace;
+            background-color:azure;
+        }
+        h1 {
+            color: darkblue;    
+        }
+        #xy {
+            font-size: 13px;
+        }
+        #shape {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            display: none;
+            position : relative;
+        }
+    
+    </style>
+    
+    </head>
+  <body>
+    <h1> Java script game of circle diminishing</h1>
+    <p> Click on the circles as soon as you can ! </p>  
+        <p id ="xy">  Your Time : <span id = "timeTaken"></span></p>
+      <div id = "shape"></div>
+      <script type ="text/javascript">
+
+  var start = new Date().getTime();
+          
+  function getRandomcolor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color ='#';
+      for(var i=0 ; i<6 ; i++){
+      color  += letters[Math.floor(Math.random() * 16)];
+      }
+     return color; 
+  }
+  
+   function makeshapeAppear() {
+       var top = Math.random() * 400;
+       var left = Math.random() * 400;
+       var width = Math.random() * 300;
+       if (Math.random()>0.5) {
+         document.getElementById("shape").style.borderRadius = "50%";   
+       }
+       else {
+           document.getElementById("shape").style.borderRadius = "0"; 
+       }
+       
+       document.getElementById("shape").style.backgroundColor = getRandomcolor(); 
+       document.getElementById("shape").style.height =  width + "px"; 
+       document.getElementById("shape").style.width =  width + "px"; 
+       document.getElementById("shape").style.top = top + "px"; 
+       document.getElementById("shape").style.left = left +  "px"; 
+       document.getElementById("shape").style.display = "Block"; 
+  
+          start = new Date().getTime();
+   }
+          function appearAfterdelay() {
+              setTimeout(makeshapeAppear ,Math.random() * 2000);
+          }
+          appearAfterdelay();
+          document.getElementById("shape").onclick = function() {
+              document.getElementById("shape").style.display = "none";
+              var end = new Date().getTime();
+              var timeTaken = (end-start)/1000;
+              document.getElementById("timeTaken").innerHTML = timeTaken + "s";
+              appearAfterdelay();
+          }
+      
+      </script>
+    </body>
+
+</html>
